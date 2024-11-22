@@ -1,29 +1,29 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Sport = sequelize.define(
-  "sport",
+const Competitor = sequelize.define(
+  "Competitor",
   {
-    sport_id: {
+    competitor_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
     name: {
       type: DataTypes.STRING,
-      unique: true,
       allowNull: false,
     },
-
-    description: {
-      type: DataTypes.TEXT,
+    country: {
+      type: DataTypes.STRING,
+    },
+    home_city: {
+      type: DataTypes.STRING,
     },
   },
   {
-    tableName: "sport",
+    tableName: "competitor",
     timestamps: false,
   }
 );
 
-module.exports = Sport;
+module.exports = Competitor;

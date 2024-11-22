@@ -1,29 +1,24 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../util/database");
 
-const Sport = sequelize.define(
-  "sport",
+const EventCategory = sequelize.define(
+  "EventCategory",
   {
-    sport_id: {
+    category_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
     name: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
     },
-
-    description: {
-      type: DataTypes.TEXT,
-    },
   },
   {
-    tableName: "sport",
+    tableName: "eventcategory",
     timestamps: false,
   }
 );
 
-module.exports = Sport;
+module.exports = EventCategory;
