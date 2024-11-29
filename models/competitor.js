@@ -10,14 +10,20 @@ const Competitor = sequelize.define(
       autoIncrement: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100), // limit name length to 100 characters
       allowNull: false,
+      validate: {
+        notEmpty: true, // ensure name is not empty
+      },
     },
     country: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50), // limit country name to 50 characters
+      validate: {
+        is: /^[a-zA-Z\s]*$/, // only allow letters and spaces
+      },
     },
     home_city: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100), // limit home city to 100 characters
     },
   },
   {
