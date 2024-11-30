@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title Events App
+    link(rel="stylesheet" href="/css/style.css")
+    link(href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet")
+  body
+    nav
+      div.nav-left
+        a(href="#") home
+        a(href="#") about us
+        a(href="#") want to meet us?
+      div.nav-center
+        button.arrow-left &larr; <!-- Left arrow -->
+        span.current-date #{currentDate} <!-- Dynamic current date -->
+        button.arrow-right &rarr; <!-- Right arrow -->
+      div.nav-right
+        input(type="text" placeholder="Search events...")
+    main
+      .filter-section
+        h3 filters
+        button.pick-date-btn pick date
+        button.filter-btn filter by sport
+        button.filter-btn filter by date
+        button.add-event-btn add new event
+      .event-list
+        h1 events List
+        each event in events
+          .event-card
+            p Date: #{event.date}
+            p Sport: #{event.sport}
+            p Teams: #{event.teams}
+            p Info: #{event.info}
+    block content
+    script(src="/js/script.js")

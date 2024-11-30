@@ -1,0 +1,182 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inconsolata", sans-serif; /* Use Inconsolata as the primary font */
+  background-color: #1e1e1e; /* Grayish dark background */
+  color: #e4e4e4; /* Light text */
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between; /* Spread navigation links and arrows */
+  align-items: center;
+  background-color: #2a2a2a; /* Darker gray background for nav */
+  padding: 10px 20px;
+  border-bottom: 2px solid #eab308; /* Bright yellow border */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* Navigation Left Links */
+.nav-left a {
+  margin-right: 15px;
+  color: #e4e4e4; /* Light gray text */
+  text-decoration: none;
+  font-weight: 500; /* Lighter font weight for smaller links */
+  font-size: 1.1rem; /* Smaller font size */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+div.nav-right {
+  margin-right: 50px;
+}
+
+.nav-left a:hover {
+  color: #eab308; /* Bright yellow on hover */
+}
+
+/* Date and Arrows Navigation */
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e; /* Match body background */
+  color: #eab308; /* Bright yellow text */
+  padding: 5px 5px;
+  border-radius: 8px;
+  font-size: 2rem; /* Larger font size for date */
+  font-weight: 700; /* Make it bold */
+  text-align: center;
+  position: relative;
+}
+
+.arrow-left,
+.arrow-right {
+  margin-bottom: 30px;
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove button borders */
+  color: #eab308; /* Bright yellow */
+  font-size: 5rem; /* Large arrow size */
+  font-weight: bold;
+  cursor: pointer; /* Show pointer on hover */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.arrow-left:hover,
+.arrow-right:hover {
+  color: #fce77d; /* Lighter yellow on hover */
+}
+
+.arrow-left {
+  margin-right: 15px; /* Space between left arrow and date */
+}
+
+.arrow-right {
+  margin-left: 15px; /* Space between date and right arrow */
+}
+
+/* Search Bar */
+.nav-right input[type="text"] {
+  padding: 5px 10px;
+  border: 1px solid #444; /* Match background border */
+  border-radius: 5px;
+  background-color: #2a2a2a; /* Match nav background */
+  color: #e4e4e4; /* Light text for input */
+  font-size: 1rem;
+  width: 180px; /* Width for the search bar */
+  margin-left: 15px; /* Space from the right arrow */
+}
+
+.nav-right input[type="text"]::placeholder {
+  color: #aaa; /* Subtle placeholder color */
+}
+
+.nav-right input[type="text"]:focus {
+  border-color: #eab308; /* Bright yellow border on focus */
+  outline: none;
+}
+
+/* Left Filter Section */
+.filter-section {
+  background-color: #2a2a2a; /* Dark gray card background */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for elevation */
+  border: 1px solid #444; /* Subtle border */
+  width: 200px; /* Fixed width for the filter section */
+  margin-right: 20px; /* Space from event list */
+  flex-shrink: 0; /* Prevent it from shrinking */
+  height: 100%; /* Stretch to fill the height of the parent (main) */
+}
+
+.filter-section h3 {
+  color: #eab308; /* Bright yellow heading */
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.filter-section button {
+  display: block;
+  width: 100%; /* Full width buttons */
+  padding: 8px 15px;
+  margin-bottom: 10px;
+  background-color: #eab308; /* Bright yellow button */
+  color: #1e1e1e; /* Dark text */
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-section button:hover {
+  background-color: #fce77d; /* Lighter yellow on hover */
+}
+
+/* Main Content */
+main {
+  display: flex; /* Flex layout to include filter section and events list */
+  align-items: stretch; /* Ensure children stretch to match height */
+  height: 100vh; /* Make main content occupy the full viewport height */
+}
+
+.event-list {
+  flex: 1; /* Take remaining space */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-card {
+  background-color: #2a2a2a; /* Dark gray card background */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  border: 1px solid #444; /* Subtle border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.event-card:hover {
+  transform: scale(1.02); /* Slight zoom effect */
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.5); /* Add yellowish glow */
+}
+
+.event-card p {
+  margin-bottom: 8px;
+  color: #e4e4e4; /* Light text */
+}
+
+.event-card p span {
+  font-weight: 600;
+  color: #eab308; /* Highlighted bright yellow */
+}
