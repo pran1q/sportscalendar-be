@@ -1,55 +1,45 @@
-const port = 3000;
-
-// Importing express
 const express = require("express");
-// Database connection
+const path = require("path");
+const eventRoutes = require("./routes/eventRoutes");
+const sportRoutes = require("./routes/sportRoutes");
+const { Event, Sport, Venue, EventCategory } = require("./models/models");
 const sequelize = require("./util/database");
 
-const eventRoutes = require("./routes/eventRoutes");
-
 const app = express();
+app.set("view engine", "pug"); // Set Pug as the template engine
+app.set("views", path.join(__dirname, "views")); // Set views directory
 
-// Setting Pug as the template engine
-app.set("view engine", "pug");
-app.set("views", "./views");
-
-// Middleware to parse incoming JSON requests
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public"))); // Serve static files
 
-// Serve static files (e.g., CSS) from the public folder
-app.use(express.static("public"));
+// Routes
+app.use("/api/events", eventRoutes);
+app.use("/api/sports", sportRoutes);
 
-// Routes for API
-app.use("/api", eventRoutes);
-
-// Route to render the frontend page
-app.get("/", (req, res) => {
-  const currentDate = new Date().toLocaleDateString();
-  // Example events data; replace with data fetched from your database
-  const events = [
-    {
-      date: "2024-12-01",
-      sport: "Football",
-      teams: "Salzburg vs. Sturm",
-      info: "League Match",
-    },
-    {
-      date: "2024-12-05",
-      sport: "Basketball",
-      teams: "Lakers vs. Celtics",
-      info: "Friendly Match",
-    },
-  ];
-  res.render("index", { currentDate, events });
+// Render the main page with today's events
+app.get("/", async (req, res) => {
+  try {
+    const today = new Date().toISOString().split("T")[0];
+    const events = await Event.findAll({
+      where: sequelize.where(
+        sequelize.fn("DATE", sequelize.col("data_time")),
+        today
+      ),
+      include: [
+        { model: Sport, as: "sport", attributes: ["name"] },
+        { model: Venue, as: "venue", attributes: ["name", "location"] },
+        { model: EventCategory, as: "category", attributes: ["name"] },
+      ],
+    });
+    res.render("index", { currentDate: today, events });
+  } catch (error) {
+    console.error("Error rendering main page:", error);
+    res.status(500).send("An error occurred while rendering the page.");
+  }
 });
 
-// Syncing with the database
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log("Database synced!");
-    app.listen(port, () =>
-      console.log(`Server running on http://localhost:${port}`)
-    );
-  })
-  .catch((err) => console.error("Error syncing database:", err));
+const port = 3000;
+sequelize.sync({ force: false }).then(() => {
+  console.log("Database connected");
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+});

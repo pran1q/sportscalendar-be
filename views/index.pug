@@ -1,4 +1,21 @@
 extends layout
 
 block content
-  
+  main
+    .filter-section
+      h3 Filters
+      button.pick-date-btn Pick Date
+      button.filter-btn Filter by Sport
+      button.filter-btn Filter by Date
+      button.add-event-btn Add New Event
+    .event-list
+      if events.length > 0
+        each event in events
+          .event-card
+            p Date: #{new Date(event.data_time).toLocaleString()}
+            p Sport: #{event.sport.name}
+            p Venue: #{event.venue.name}, #{event.venue.location}
+            p Category: #{event.category.name}
+            p Description: #{event.description}
+      else
+        p No events found for this date.

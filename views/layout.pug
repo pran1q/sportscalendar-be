@@ -23,7 +23,7 @@ html
         button.pick-date-btn pick date
         button.filter-btn filter by sport
         button.filter-btn filter by date
-        button.add-event-btn add new event
+        button.add-event-btn(id="add-event-btn") add new event
       .event-list
         h1 events List
         each event in events
@@ -32,5 +32,24 @@ html
             p Sport: #{event.sport}
             p Teams: #{event.teams}
             p Info: #{event.info}
-    block content
+    // Modal for Add Event Form
+    #add-event-modal.hidden
+      .modal-content
+        h2 Add New Event
+        form#add-event-form
+          label(for="sport") Sport:
+          input#sport-input(type="text" name="sport" placeholder="Type or select a sport" required)
+          ul#sport-suggestions.hidden
+          // Suggestions will populate here dynamically
+          label(for="_category_id") Category ID:
+          input(type="number" name="_category_id" required)
+          label(for="_venue_id") Venue ID:
+          input(type="number" name="_venue_id" required)
+          label(for="data_time") Date & Time:
+          input(type="datetime-local" name="data_time" required)
+          label(for="description") Description:
+          textarea(name="description" rows="3" required)
+          button(type="submit") Submit
+        button.close-btn Close
     script(src="/js/script.js")
+    block content

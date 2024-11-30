@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-// importing validators for validating req data
+// Importing validators for validating request data
 const { body } = require("express-validator");
 
 const eventController = require("../controllers/eventController");
 
-// POST /api/events ADD NEW EVENT
+// POST /api/events - Add a new event
 router.post(
   "/events",
   [
@@ -17,10 +17,13 @@ router.post(
   eventController.addEvent
 );
 
-// GET /api/events GET ALL EVENTS
+// GET /api/events - Get all events (optionally filter by date using query param: ?date=YYYY-MM-DD)
 router.get("/events", eventController.getAllEvents);
 
-// GET /api/events GET ONE EVENT
+// GET /api/events/today - Get events happening today
+router.get("/events/today", eventController.getTodaysEvents); // Ensure this exists in eventController.js
+
+// GET /api/events/:id - Get one event by ID
 router.get("/events/:id", eventController.getEventById);
 
 module.exports = router;
